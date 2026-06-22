@@ -10,6 +10,8 @@ import {BalanceChartComponent} from '../components/balance-chart/balance-chart.c
 import {MatIcon} from '@angular/material/icon';
 import {MatIconButton} from '@angular/material/button';
 import {CurrencyPipe} from '@angular/common';
+import {ToastService} from '../../core/service/toast.service';
+import {ToastTypeEnum} from '../../core/enum/toast-type.enum';
 
 @Component({
   templateUrl: 'account-overview-page.component.html',
@@ -32,13 +34,21 @@ export class AccountOverviewPageComponent implements OnInit {
   private readonly route: ActivatedRoute = inject(ActivatedRoute);
   protected readonly accountId: number = Number(this.route.snapshot.paramMap.get('id'));
   private readonly router: Router = inject(Router);
-  private readonly accountRestService = inject(AccountRestService);
+  private readonly accountRestService: AccountRestService = inject(AccountRestService);
+  private readonly toastService: ToastService = inject(ToastService);
 
   ngOnInit(): void {
     this.accountRestService.getAccountInformation(this.accountId!)
       .subscribe({
         next: (account) => this.accountInformation.set(account),
-        error: (error) => console.error(error)
+        error: (error) => {
+          console.error(error);
+          this.toastService.open(
+            "Could not load account information.",
+            "Close",
+            ToastTypeEnum.ERROR
+          );
+        }
       });
   }
 

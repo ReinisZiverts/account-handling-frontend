@@ -8,6 +8,8 @@ import {MatButton} from '@angular/material/button';
 import {AuthorizationService} from '../../service/authorization.service';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
+import {ToastService} from '../../service/toast.service';
+import {ToastTypeEnum} from '../../enum/toast-type.enum';
 
 @Component({
   selector: 'name',
@@ -27,6 +29,7 @@ export class LoginPageComponent {
   protected loginForm: FormGroup<LoginForm> = LoginFormHelper.createForm()
   private readonly authorizationService: AuthorizationService = inject(AuthorizationService);
   private readonly router: Router = inject(Router);
+  private readonly toastService: ToastService = inject(ToastService);
 
   protected login() {
     this.authorizationService.login(this.loginForm.getRawValue())
@@ -34,7 +37,15 @@ export class LoginPageComponent {
         next: async () => {
           await this.router.navigateByUrl("/");
         },
-        error: (error: HttpErrorResponse) => { console.error(error) }
+        error: (error: HttpErrorResponse) => {
+          console.error(error);
+          this.toastService.open(
+            "Account not found or wrong password.",
+            "Close",
+            ToastTypeEnum.ERROR
+          )
+        }
       });
   }
+
 }

@@ -4,6 +4,8 @@ import {AccountTransaction} from '../../../models/account-transaction';
 import {AccountRestService} from '../../../service/account.rest-service';
 import dayjs from 'dayjs';
 import {HttpErrorResponse} from '@angular/common/http';
+import {ToastService} from '../../../core/service/toast.service';
+import {ToastTypeEnum} from '../../../core/enum/toast-type.enum';
 
 @Component({
   selector: 'balance-chart',
@@ -15,6 +17,7 @@ export class BalanceChartComponent implements AfterViewInit, OnDestroy {
 
   private trendChart?: Chart;
   private readonly accountRestService: AccountRestService = inject(AccountRestService);
+  private readonly toastService: ToastService = inject(ToastService);
 
   ngAfterViewInit(): void {
     this.accountRestService.getAccountTransactions(this.accountId())
@@ -22,7 +25,14 @@ export class BalanceChartComponent implements AfterViewInit, OnDestroy {
         next:(transactions) => {
           this.renderChart(transactions.accountTransactions)
         },
-        error: (error: HttpErrorResponse) => console.error(error)
+        error: (error: HttpErrorResponse) => {
+          console.error(error);
+          this.toastService.open(
+            "Data for chart could not be loaded.",
+            "Close",
+            ToastTypeEnum.ERROR
+          );
+        }
       });
   }
 

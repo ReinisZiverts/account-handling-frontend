@@ -18,6 +18,8 @@ import {BalanceChartComponent} from '../balance-chart/balance-chart.component';
 import {CurrencyPipe} from '@angular/common';
 import {MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
+import {ToastService} from '../../../core/service/toast.service';
+import {ToastTypeEnum} from '../../../core/enum/toast-type.enum';
 
 @Component({
   selector: 'transaction-list',
@@ -46,6 +48,7 @@ export class TransactionListComponent implements OnInit {
   private currentPage = 0;
   private readonly accountRestService: AccountRestService = inject(AccountRestService);
   private readonly router: Router = inject(Router);
+  private readonly toastService: ToastService = inject(ToastService);
 
   ngOnInit(): void  {
     this.loadMoreTransactions();
@@ -99,8 +102,14 @@ export class TransactionListComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           this.isLoadingTransactions.set(false);
+          this.toastService.open(
+            "Could not load transactions.",
+            "Close",
+            ToastTypeEnum.ERROR
+          );
           console.error(error);
         }
       })
   }
+
 }

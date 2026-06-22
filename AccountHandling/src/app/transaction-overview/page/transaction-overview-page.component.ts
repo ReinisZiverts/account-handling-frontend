@@ -11,6 +11,8 @@ import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {TDocumentDefinitions} from 'pdfmake/interfaces';
 import {PdfHelper} from '../../core/helper/pdf.helper';
+import {ToastService} from '../../core/service/toast.service';
+import {ToastTypeEnum} from '../../core/enum/toast-type.enum';
 
 @Component({
   templateUrl: 'transaction-overview-page.component.html',
@@ -30,18 +32,26 @@ import {PdfHelper} from '../../core/helper/pdf.helper';
 })
 export class TransactionOverviewPageComponent implements OnInit {
 
-  private readonly route = inject(ActivatedRoute);
+  private readonly route: ActivatedRoute = inject(ActivatedRoute);
   protected readonly transactionId: number = Number(this.route.snapshot.paramMap.get('id'));
   protected readonly accountId: number = Number(this.route.snapshot.paramMap.get('accountId'));
   protected readonly transaction: WritableSignal<AccountTransaction | null> = signal<AccountTransaction | null>(null);
   private readonly router: Router = inject(Router);
-  private readonly accountRestService = inject(AccountRestService);
+  private readonly accountRestService: AccountRestService = inject(AccountRestService);
+  private readonly toastService: ToastService = inject(ToastService);
 
   ngOnInit(): void {
     this.accountRestService.getTransactionInfo(this.transactionId, this.accountId)
       .subscribe({
         next: (transaction) => this.transaction.set(transaction),
-        error: (error: HttpErrorResponse) => console.error(error)
+        error: (error: HttpErrorResponse) => {
+          console.error(error);
+          this.toastService.open(
+            "Could not load transaction information.",
+            "Close",
+            ToastTypeEnum.ERROR
+          );
+        }
       })
   }
 
@@ -49,7 +59,7 @@ export class TransactionOverviewPageComponent implements OnInit {
     void this.router.navigateByUrl(`/account-overview/${this.accountId}`);
   }
 
-  protected printSummary() {
+  protected printSummary(): void {
       const pdfDefinition: TDocumentDefinitions = PdfHelper.createPdfListDefinition(this.transaction()!);
       PdfHelper.print(pdfDefinition);
   }

@@ -1,0 +1,11 @@
+<mat-card class="account-card" (click)="navigateToAccount()">
+  <mat-card-header>
+    <mat-card-title>{{ account().name }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="balance-container">
+    <span class="balance-label">Balance</span>
+    <span class="balance-value">
+      {{ account().balance | currency: account().currency }}
+    </span>
+  </mat-card-content>
+</mat-card>

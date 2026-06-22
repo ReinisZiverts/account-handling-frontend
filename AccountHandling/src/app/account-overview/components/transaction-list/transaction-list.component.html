@@ -1,0 +1,17 @@
+@if (transactions(); as accountTransactions) {
+  <div class="transaction-scroll-container" (scroll)="onScroll($event)">
+    <mat-list class="transaction-list">
+      @for(transaction of accountTransactions.accountTransactions; track transaction) {
+        <mat-list-item class="transaction-item">
+          <span matListItemTitle>{{ transaction.amount | currency: transaction.currency }} </span>
+          <span matListItemLine>{{ transaction.transactionType }}</span>
+          <button mat-icon-button matListItemMeta (click)="onTransactionClick(transaction.id); $event.stopPropagation()">
+            <mat-icon>info</mat-icon>
+          </button>
+        </mat-list-item>
+      } @empty {
+        <mat-list-item class="transaction-item">No transactions found.</mat-list-item>
+      }
+    </mat-list>
+  </div>
+}

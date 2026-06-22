@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>Login</h1>
+
+  <mat-form-field>
+    <mat-label>Username</mat-label>
+    <input matInput [formControl]="loginForm.controls.username">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input type="password" matInput
+           [formControl]="loginForm.controls.password">
+  </mat-form-field>
+
+  <mat-card-footer>
+    <button mat-raised-button color="primary"
+            [disabled]="loginForm.invalid"
+            (click)="login()">
+      Login
+    </button>
+  </mat-card-footer>
+</div>

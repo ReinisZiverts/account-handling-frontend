@@ -1,0 +1,15 @@
+mat-card-header {
+  justify-content: center;
+}
+
+.account-card {
+  border-radius: 16px;
+}
+
+.balance-container {
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}

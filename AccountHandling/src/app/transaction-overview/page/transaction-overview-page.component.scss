@@ -1,0 +1,24 @@
+.container {
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .content-holder {
+    margin-top: 30px;
+    display: flex;
+
+    .transaction-overview {
+      width: stretch;
+      mat-card-header {
+        justify-content: center;
+        margin-bottom: 20px;
+        align-items: center;
+      }
+
+      .transaction-detail {
+        padding: 14px 16px;
+      }
+    }
+  }
+}

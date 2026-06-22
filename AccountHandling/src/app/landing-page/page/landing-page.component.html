@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>User Overview</h1>
+
+  <section class="account-grid">
+    @for (account of accounts(); track account.id) {
+      <account-card [account]="account"/>
+    } @empty {
+      <mat-card class="empty-card">
+        <mat-card-content>
+          <p>No accounts found.</p>
+        </mat-card-content>
+      </mat-card>
+    }
+  </section>
+</div>

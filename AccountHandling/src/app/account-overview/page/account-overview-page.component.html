@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="header">
+    <button mat-icon-button type="button" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>Account Overview</h1>
+  </div>
+
+  <div class="content-holder">
+    <div class="account-information">
+      <mat-card class="account-card">
+        <mat-card-header>
+          <mat-card-title>Account Information</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          @if (accountInformation(); as account) {
+            <div>
+              <span>Account ID</span>
+              <div>{{ account.id }}</div>
+            </div>
+            <div>
+              <span>Account Name</span>
+              <div>{{ account.name }}</div>
+            </div>
+            <div>
+              <span>Account Balance</span>
+              <div>{{ account.balance | currency: account.currency }}</div>
+            </div>
+          }
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="transaction-list">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Transaction History</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <transaction-list [accountId]="accountId"/>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <balance-chart [accountId]="accountId"/>
+
+</div>

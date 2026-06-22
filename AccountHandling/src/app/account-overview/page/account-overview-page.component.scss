@@ -1,0 +1,49 @@
+.container {
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .content-holder {
+    margin-top: 30px;
+    display: flex;
+
+
+    .account-information {
+      flex-direction: column;
+      gap: 20px;
+
+      .account-card {
+        max-width: 600px;
+        max-height: fit-content;
+        margin-right: 30px;
+
+        mat-card-content {
+          margin-top: 30px;
+          margin-bottom: 30px;
+
+          > div {
+            margin-top: 10px;
+            display: flex;
+
+
+            span {
+              min-width: 150px;
+              margin-right: 10px;
+              text-align: left;
+            }
+            > div {
+              text-align: left;
+            }
+          }
+        }
+      }
+    }
+
+    .transaction-list {
+      width: stretch;
+      margin-bottom: 20px;
+    }
+  }
+}

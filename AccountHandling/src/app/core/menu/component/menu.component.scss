@@ -1,0 +1,17 @@
+.top-toolbar {
+  display: flex;
+
+  a {
+    z-index: 1001;
+  }
+
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.landing-page-link {
+  text-decoration: none;
+  color: inherit;
+}

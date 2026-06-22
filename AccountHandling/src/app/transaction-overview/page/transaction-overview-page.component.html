@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="header">
+    <button mat-icon-button type="button" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>Transaction Overview</h1>
+  </div>
+  <div class="content-holder">
+    <div class="transaction-overview">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title class="transaction-title">Transaction Information</mat-card-title>
+          <mat-card-actions>
+            <button mat-icon-button (click)="printSummary()">
+              <mat-icon>print</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card-header>
+        <mat-card-content>
+          @if (transaction(); as transaction) {
+            <div class="transaction-detail">
+              <span>Transaction ID</span>
+              <div>{{ transaction.id }}</div>
+            </div>
+            <div class="transaction-detail">
+              <span>Transaction Type</span>
+              <div>{{ transaction.transactionType}}</div>
+            </div>
+            <div class="transaction-detail">
+              <span>Transaction Amount</span>
+              <div>{{ transaction.amount | currency: transaction.currency }}</div>
+            </div>
+            <div class="transaction-detail">
+              <span>Balance After Transaction</span>
+              <div>{{ transaction.balanceAfter | currency: transaction.currency }}</div>
+            </div>
+            <div class="transaction-detail">
+              <span>Transaction Date</span>
+              <div>{{ transaction.createdOn | date }}</div>
+            </div>
+          }
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

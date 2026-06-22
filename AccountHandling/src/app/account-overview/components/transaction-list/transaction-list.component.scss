@@ -1,0 +1,17 @@
+.transaction-scroll-container {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 8px;
+  scroll-behavior: smooth;
+}
+
+.transaction-list {
+  padding: 0;
+  display: flex;
+  align-content: flex-start;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+

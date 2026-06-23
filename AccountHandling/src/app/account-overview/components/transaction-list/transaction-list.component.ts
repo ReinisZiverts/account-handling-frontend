@@ -30,7 +30,6 @@ import {ToastTypeEnum} from '../../../core/enum/toast-type.enum';
     MatListItem,
     MatListItemLine,
     MatListItemTitle,
-    BalanceChartComponent,
     CurrencyPipe,
     MatIconButton,
     MatIcon,

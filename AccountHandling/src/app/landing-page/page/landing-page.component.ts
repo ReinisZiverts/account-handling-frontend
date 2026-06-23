@@ -14,8 +14,6 @@ import {ToastTypeEnum} from '../../core/enum/toast-type.enum';
   imports: [
     MatCard,
     MatCardContent,
-    MatCardTitle,
-    MatCardHeader,
     AccountCardComponent
   ],
 })

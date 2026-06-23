@@ -25,7 +25,6 @@ import {ToastTypeEnum} from '../../core/enum/toast-type.enum';
     CurrencyPipe,
     DatePipe,
     MatCardActions,
-    MatButton,
     MatIconButton,
     MatIcon
   ]

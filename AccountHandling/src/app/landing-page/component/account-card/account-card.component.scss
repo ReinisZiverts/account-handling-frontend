@@ -3,6 +3,11 @@ mat-card-header {
 }
 
 .account-card {
+
+  &:hover {
+    cursor: pointer;
+  }
+
   border-radius: 16px;
 }
 
